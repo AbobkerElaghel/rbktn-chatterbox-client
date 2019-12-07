@@ -3,6 +3,7 @@ var App = {
   $spinner: $('.spinner img'),
 
   username: 'anonymous',
+  _messages: undefined,
 
   initialize: function() {
     App.username = window.location.search.substr(10);
@@ -21,7 +22,9 @@ var App = {
     Parse.readAll((data) => {
       // examine the response from the server request:
       console.log(data);
-
+      App._messages = data.results;
+      RoomsView.render();
+      MessagesView.render();
       callback();
     });
   },
